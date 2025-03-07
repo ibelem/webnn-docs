@@ -214,7 +214,7 @@ runWebNN();
     try {
       result = await runWebNN();
     } catch (error) {
-      result = \`Error: ${error.message}\`;
+      result = 'Error:' + error.message;
     }
   });
 </script>
@@ -367,9 +367,9 @@ function App() {
         {loading ? (
           "Computing..."
         ) : error ? (
-          \`Error: ${error}\`
+          'Error: ' + error
         ) : (
-          \`Output value: ${result}\`
+          'Output value: ' + result
         )}
       </div>
     </div>
