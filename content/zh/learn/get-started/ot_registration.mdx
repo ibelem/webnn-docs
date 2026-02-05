@@ -1,0 +1,204 @@
+import { Steps } from 'nextra/components'
+import InfoIcon from '../../../../app/_components/icons/info.jsx'
+import AppleIcon from '../../../../app/_components/icons/ihv/apple.jsx'
+import AMDIcon from '../../../../app/_components/icons/ihv/amd.jsx'
+import IntelIcon from '../../../../app/_components/icons/ihv/intel.jsx'
+import QualcommIcon from '../../../../app/_components/icons/ihv/qualcomm.jsx'
+import NvidiaIcon from '../../../../app/_components/icons/ihv/nvidia.jsx'
+
+# WebNN Origin Trials Registration
+
+The **Web Neural Network API (WebNN)** is now available for testing through Origin Trials on Chrome and Edge browsers. Origin Trials allow developers to experiment with new web platform features in production environments before they become standard.
+
+## What is an Origin Trial?
+
+An Origin Trial gives you access to experimental features for your origin, allowing real users to interact with the new functionality. This helps browser vendors gather feedback and validate features before making them available to all users.
+
+## Prerequisites
+
+Before registering for the WebNN Origin Trial, ensure you have:
+
+- A website or web application that will use the WebNN API
+- Administrative access to modify HTTP headers or HTML on your site
+- A valid origin (protocol + hostname + port)
+
+## Registration Steps
+
+### For Google Chrome
+
+1. **Navigate to the Chrome Origin Trials page**
+   
+   Visit the [WebNN Chrome Origin Trial registration page](https://developer.chrome.com/origintrials/#/register_trial/2250110963824984065)
+
+2. **Sign in with your Google account**
+   
+   You'll need to authenticate to register for the trial
+
+3. **Provide your origin**
+   
+   Enter the origin where you plan to use WebNN (e.g., `https://example.com`)
+   - The origin must include the protocol (https://)
+   - Wildcards are supported for subdomains (e.g., `https://*.example.com`)
+
+4. **Submit your registration**
+   
+   Review and accept the terms, then submit your registration
+
+5. **Receive your trial token**
+   
+   You'll receive a unique token for your origin
+
+### For Microsoft Edge
+
+1. **Navigate to the Edge Origin Trials page**
+   
+   Visit the [WebNN Edge Origin Trial registration page](https://developer.microsoft.com/en-us/microsoft-edge/origin-trials/trials/19857284-cf52-484b-8b09-8ca50ac9dccb)
+
+2. **Sign in**
+   
+   Authenticate to access the trial registration
+
+3. **Provide your origin**
+   
+   Enter the origin where you plan to use WebNN
+
+4. **Submit your registration**
+   
+   Accept the terms and complete your registration
+
+5. **Receive your trial token**
+   
+   You'll receive a unique token for your origin
+
+## Implementing the Trial Token
+
+Once you've received your trial token, you need to add it to your website. There are three methods:
+
+### Method 1: Meta Tag
+
+Add a meta tag to the `<head>` section of your HTML:
+```html
+<meta http-equiv="origin-trial" content="YOUR_TOKEN_HERE">
+```
+
+> <InfoIcon /> You can insert both meta tags into the `<head>` section of HTML document, one for each browser's token. The browsers are designed to ignore tokens they don't understand, so you can safely include both.
+
+This method is useful when you cannot modify server headers.
+
+### Method 2: HTTP Header
+
+Add the token as an HTTP response header:
+```http
+Origin-Trial: YOUR_TOKEN_HERE
+```
+
+This method applies the token to all resources served from your origin.
+
+### Method 3: Provide a token programmatically
+
+Inject a token with JavaScript:
+```javascript
+const otMeta = document.createElement('meta');
+otMeta.httpEquiv = 'origin-trial';
+otMeta.content = 'TOKEN_GOES_HERE';
+document.head.append(otMeta);
+```
+
+## Verifying Your Setup
+
+To confirm the Origin Trial is active:
+
+1. Open your website in Chrome or Edge
+2. Open `DevTools` (F12)
+3. Navigate to the `Console` tab
+4. Check for any Origin Trial related messages
+5. Verify that `navigator.ml` is available:
+
+```javascript
+if ('ml' in navigator) {
+  console.log('WebNN API is available');
+} else {
+  console.log('WebNN API is not available');
+}
+```
+
+## Key Considerations
+
+### Trial Duration
+
+- Origin Trials have a limited duration
+- Monitor the trial status on the respective browser's Origin Trials page
+- Plan to remove or update tokens when the trial ends
+
+### Browser Support
+
+- Chrome: 146 to 148
+- Edge: 146 to 148
+- The feature is experimental and subject to change
+
+### User Opt-Out
+
+- Users can disable Origin Trials in their browser settings
+- Your code should gracefully handle cases where WebNN is unavailable
+
+### Origin Trial Feedback
+
+As a trial participant, your feedback is valuable and helps shape the future of the WebNN API:
+
+- **Submit feedback through the origin trial site**: You can provide private feedback directly through the Chrome Origin Trials dashboard. This feedback is confidential and only available to a limited group of people on the Chrome team.
+- **[Public community feedback](https://github.com/webmachinelearning/webnn/issues)**
+
+### Token Renewal
+
+- When your trial token approaches expiration, you will receive an email notification with a renewal link
+- To renew your token, you will be asked to submit feedback about your experience with the trial
+- This feedback helps browser vendors understand how the feature is being used and what improvements are needed
+
+## Example Usage
+
+Once the Origin Trial is active, you can begin using the WebNN API:
+```javascript
+async function initializeWebNN() {
+  if (!('ml' in navigator)) {
+    console.error('WebNN is not supported');
+    return;
+  }
+
+  try {
+    const context = await navigator.ml.createContext();
+    // Your WebNN implementation here
+  } catch (error) {
+    console.error('Failed to create WebNN context:', error);
+  }
+}
+
+initializeWebNN();
+```
+
+## Best Practices
+
+1. **Feature Detection**: Always check for WebNN support before using the API
+2. **Fallback Strategy**: Implement fallbacks for browsers without WebNN support
+3. **Error Handling**: Handle errors gracefully as the API is experimental
+4. **Performance Monitoring**: Track performance improvements from WebNN usage
+5. **Security**: Only use Origin Trials on HTTPS origins
+
+## Getting Help
+
+- **Chrome WebNN Issues**: [Chromium Bug Tracker](https://bugs.chromium.org/)
+- **Edge WebNN Issues**: [Edge Developer Support](https://developer.microsoft.com/en-us/microsoft-edge/)
+
+## Next Steps
+
+After registering and implementing the trial token:
+
+1. Test your WebNN implementation thoroughly
+2. Monitor performance and user experience
+3. Provide feedback to browser vendors
+4. Stay informed about trial expiration dates
+5. Plan for migration to the standard API when available
+
+## Additional Resources
+
+- [Google Chrome: Get started with origin trials](https://developer.chrome.com/docs/web-platform/origin-trials)
+- [Microsoft Edge: Test experimental APIs and features by using origin trials](https://learn.microsoft.com/en-us/microsoft-edge/origin-trials/)
