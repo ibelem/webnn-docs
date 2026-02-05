@@ -14,4 +14,7 @@ export default {
   'debug': {
     title: "🧪 Debug"
   },
+  'ot_registration': {
+    title: "💡 Origin Trials Registration"
+  },
 };
