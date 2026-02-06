@@ -80,8 +80,9 @@ Origin Trial 为您的网站提供实验性功能的访问权限，允许真实�
 ```html
 <meta http-equiv="origin-trial" content="YOUR_TOKEN_HERE">
 ```
+> <InfoIcon /> 您需要在每个使用 WebNN 的页面提供令牌
 
-> <InfoIcon /> 您可以在 HTML 文档的 `<head>` 部分插入两个 meta 标签，每个浏览器的令牌各一个。浏览器设计为忽略它们无法识别的令牌，因此您可以安全地同时包含两者。
+> <InfoIcon /> 您可以在 HTML 文档的 `<head>` 部分插入两个 meta 标签，Chrome 和 Edge 的令牌各一个。浏览器设计为忽略它们无法识别的令牌，因此您可以安全地同时包含两者。
 
 此方法适用于无法修改服务器头的情况。
 

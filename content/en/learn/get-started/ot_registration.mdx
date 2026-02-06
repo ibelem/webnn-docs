@@ -80,8 +80,9 @@ Add a meta tag to the `<head>` section of your HTML:
 ```html
 <meta http-equiv="origin-trial" content="YOUR_TOKEN_HERE">
 ```
+> <InfoIcon /> You need to provide the token on every page that uses WebNN
 
-> <InfoIcon /> You can insert both meta tags into the `<head>` section of HTML document, one for each browser's token. The browsers are designed to ignore tokens they don't understand, so you can safely include both.
+> <InfoIcon /> You can insert both meta tags (Chrome and Edge) into the `<head>` section of HTML document, one for each browser's token. The browsers are designed to ignore tokens they don't understand, so you can safely include both.
 
 This method is useful when you cannot modify server headers.
 
