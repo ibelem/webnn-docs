@@ -292,7 +292,7 @@ export default async function RootLayout({ children, params }) {
                 <div className="snow">
                   <span></span><span></span><span></span><span></span><span></span>
                 </div>
-                <a href="https://github.com/webmachinelearning/webnn-docs/issues">
+                <a href="https://webnn.io/learn/get-started/ot_registration">
                   {dictionary.banner}
                 </a>
               </div>
