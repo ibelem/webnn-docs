@@ -6,97 +6,97 @@ import IntelIcon from '../../../../app/_components/icons/ihv/intel.jsx'
 import QualcommIcon from '../../../../app/_components/icons/ihv/qualcomm.jsx'
 import NvidiaIcon from '../../../../app/_components/icons/ihv/nvidia.jsx'
 
-# WebNN Origin Trials Registration
+# WebNN Origin Trial 注册
 
-The **Web Neural Network API (WebNN)** is now available for testing through Origin Trials on Chrome and Edge browsers. Origin Trials allow developers to experiment with new web platform features in production environments before they become standard.
+**Web Neural Network API (WebNN)** 现已通过 Chrome 和 Edge 浏览器的 Origin Trial 开放测试。Origin Trial 允许开发者在新的 Web 平台功能成为标准之前，在生产环境中进行试验。
 
-## What is an Origin Trial?
+## 什么是 Origin Trial?
 
-An Origin Trial gives you access to experimental features for your origin, allowing real users to interact with the new functionality. This helps browser vendors gather feedback and validate features before making them available to all users.
+Origin Trial 为您的网站提供实验性功能的访问权限，允许真实用户与新功能进行交互。这有助于浏览器厂商在将功能提供给所有用户之前收集反馈并验证功能。
 
-## Prerequisites
+## 前提条件
 
-Before registering for the WebNN Origin Trial, ensure you have:
+在注册 WebNN Origin Trial 之前，请确保您具备:
 
-- A website or web application that will use the WebNN API
-- Administrative access to modify HTTP headers or HTML on your site
-- A valid origin (protocol + hostname + port)
+- 将使用 WebNN API 的网站或 Web 应用
+- 修改网站 HTTP headers 或 HTML 的管理员权限
+- 有效的 origin (协议 + 主机名 + 端口)
 
-## Registration Steps
+## 注册步骤
 
-### For Google Chrome
+### Google Chrome
 
-1. **Navigate to the Chrome Origin Trials page**
+1. **访问 Chrome Origin Trials 页面**
    
-   Visit the [WebNN Chrome Origin Trial registration page](https://developer.chrome.com/origintrials/#/register_trial/2250110963824984065)
+   访问 [WebNN Chrome Origin Trial 注册页面](https://developer.chrome.com/origintrials/#/register_trial/2250110963824984065)
 
-2. **Sign in with your Google account**
+2. **使用 Google 账号登录**
    
-   You'll need to authenticate to register for the trial
+   您需要进行身份验证才能注册试用
 
-3. **Provide your origin**
+3. **提供您的 Origin**
    
-   Enter the origin where you plan to use WebNN (e.g., `https://example.com`)
-   - The origin must include the protocol (https://)
-   - Wildcards are supported for subdomains (e.g., `https://*.example.com`)
+   输入您计划使用 WebNN 的 Origin (例如:`https://example.com`)
+   - 必须包含协议 (https://)
+   - 支持子域名通配符 (例如:`https://*.example.com`)
 
-4. **Submit your registration**
+4. **提交注册**
    
-   Review and accept the terms, then submit your registration
+   查看并接受条款，然后提交注册
 
-5. **Receive your trial token**
+5. **接收试用令牌**
    
-   You'll receive a unique token for your origin
+   您将收到针对您 Origin 的唯一令牌
 
-### For Microsoft Edge
+### Microsoft Edge
 
-1. **Navigate to the Edge Origin Trials page**
+1. **访问 Edge Origin Trials 页面**
    
-   Visit the [WebNN Edge Origin Trial registration page](https://developer.microsoft.com/en-us/microsoft-edge/origin-trials/trials/19857284-cf52-484b-8b09-8ca50ac9dccb)
+   访问 [WebNN Edge Origin Trial 注册页面](https://developer.microsoft.com/en-us/microsoft-edge/origin-trials/trials/19857284-cf52-484b-8b09-8ca50ac9dccb)
 
-2. **Sign in**
+2. **登录**
    
-   Authenticate to access the trial registration
+   进行身份验证以访问试用注册
 
-3. **Provide your origin**
+3. **提供您的 Origin**
    
-   Enter the origin where you plan to use WebNN
+   输入您计划使用 WebNN 的 Origin
 
-4. **Submit your registration**
+4. **提交注册**
    
-   Accept the terms and complete your registration
+   接受条款并完成注册
 
-5. **Receive your trial token**
+5. **接收试用令牌**
    
-   You'll receive a unique token for your origin
+   您将收到针对您 Origin 的唯一令牌
 
-## Implementing the Trial Token
+## 部署试用令牌
 
-Once you've received your trial token, you need to add it to your website. There are three methods:
+收到试用令牌后，您需要将其添加到您的网站。有三种方法:
 
-### Method 1: Meta Tag
+### 方法 1: Meta 标签
 
-Add a meta tag to the `<head>` section of your HTML:
+在 HTML 的 `<head>` 部分添加 meta 标签:
 ```html
 <meta http-equiv="origin-trial" content="YOUR_TOKEN_HERE">
 ```
 
-> <InfoIcon /> You can insert both meta tags into the `<head>` section of HTML document, one for each browser's token. The browsers are designed to ignore tokens they don't understand, so you can safely include both.
+> <InfoIcon /> 您可以在 HTML 文档的 `<head>` 部分插入两个 meta 标签，每个浏览器的令牌各一个。浏览器设计为忽略它们无法识别的令牌，因此您可以安全地同时包含两者。
 
-This method is useful when you cannot modify server headers.
+此方法适用于无法修改服务器头的情况。
 
-### Method 2: HTTP Header
+### 方法 2: HTTP 头
 
-Add the token as an HTTP response header:
+将令牌添加为 HTTP 响应头:
 ```http
 Origin-Trial: YOUR_TOKEN_HERE
 ```
 
-This method applies the token to all resources served from your origin.
+此方法将令牌应用于从您源站提供的所有资源。
 
-### Method 3: Provide a token programmatically
+### 方法 3: 通过编程方式提供令牌
 
-Inject a token with JavaScript:
+使用 JavaScript 注入令牌:
 ```javascript
 const otMeta = document.createElement('meta');
 otMeta.httpEquiv = 'origin-trial';
@@ -104,101 +104,96 @@ otMeta.content = 'TOKEN_GOES_HERE';
 document.head.append(otMeta);
 ```
 
-## Verifying Your Setup
+## 验证您的设置
 
-To confirm the Origin Trial is active:
+确认 Origin Trial 是否激活:
 
-1. Open your website in Chrome or Edge
-2. Open `DevTools` (F12)
-3. Navigate to the `Console` tab
-4. Check for any Origin Trial related messages
-5. Verify that `navigator.ml` is available:
+1. 在 Chrome 或 Edge 中打开您的网站
+2. 打开`开发者工具` (F12)
+3. 导航到`控制台`标签页
+4. 检查是否有 Origin Trial 相关消息
+5. 验证 `navigator.ml` 是否可用:
 
 ```javascript
 if ('ml' in navigator) {
-  console.log('WebNN API is available');
+  console.log('WebNN API 可用');
 } else {
-  console.log('WebNN API is not available');
+  console.log('WebNN API 不可用');
 }
 ```
 
-## Key Considerations
+## 重要注意事项
 
-### Trial Duration
+### 试用期限
 
-- Origin Trials have a limited duration
-- Monitor the trial status on the respective browser's Origin Trials page
-- Plan to remove or update tokens when the trial ends
+- Origin Trial 的持续时间有限，请在各浏览器的 Origin Trial 页面上监控试用状态
+  - Chrome: 146 至 148
+  - Edge: 146 至 148
+- 计划在试用结束时删除或更新令牌
 
-### Browser Support
+### 用户选择退出
 
-- Chrome: 146 to 148
-- Edge: 146 to 148
-- The feature is experimental and subject to change
+- 用户可以在浏览器设置中禁用 Origin Trial
+- 您的代码应优雅地处理 WebNN 不可用的情况
 
-### User Opt-Out
+### Origin Trial 反馈
 
-- Users can disable Origin Trials in their browser settings
-- Your code should gracefully handle cases where WebNN is unavailable
+作为试用参与者，您的反馈很有价值，有助于塑造 WebNN API 的未来:
 
-### Origin Trial Feedback
+- **通过 Origin Trial 网站提交反馈**: 您可以直接通过 Chrome Origin Trials 仪表板提供私密反馈。此反馈是保密的，仅供 Chrome 团队的有限人员使用。
+- **[公共社区反馈](https://github.com/webmachinelearning/webnn/issues)**
 
-As a trial participant, your feedback is valuable and helps shape the future of the WebNN API:
+### 令牌续期
 
-- **Submit feedback through the origin trial site**: You can provide private feedback directly through the Chrome Origin Trials dashboard. This feedback is confidential and only available to a limited group of people on the Chrome team.
-- **[Public community feedback](https://github.com/webmachinelearning/webnn/issues)**
+- 当您的试用令牌即将过期时，您将收到包含续期链接的电子邮件通知
+- 要续期令牌，系统会要求您提交关于试用体验的反馈
+- 此反馈有助于浏览器厂商了解功能的使用情况以及需要哪些改进
 
-### Token Renewal
+## 使用示例
 
-- When your trial token approaches expiration, you will receive an email notification with a renewal link
-- To renew your token, you will be asked to submit feedback about your experience with the trial
-- This feedback helps browser vendors understand how the feature is being used and what improvements are needed
-
-## Example Usage
-
-Once the Origin Trial is active, you can begin using the WebNN API:
+Origin Trial 激活后，您可以开始使用 WebNN API:
 ```javascript
 async function initializeWebNN() {
   if (!('ml' in navigator)) {
-    console.error('WebNN is not supported');
+    console.error('不支持 WebNN');
     return;
   }
 
   try {
     const context = await navigator.ml.createContext();
-    // Your WebNN implementation here
+    // 在此处实现您的 WebNN 代码
   } catch (error) {
-    console.error('Failed to create WebNN context:', error);
+    console.error('创建 WebNN 上下文失败:'， error);
   }
 }
 
 initializeWebNN();
 ```
 
-## Best Practices
+## 最佳实践
 
-1. **Feature Detection**: Always check for WebNN support before using the API
-2. **Fallback Strategy**: Implement fallbacks for browsers without WebNN support
-3. **Error Handling**: Handle errors gracefully as the API is experimental
-4. **Performance Monitoring**: Track performance improvements from WebNN usage
-5. **Security**: Only use Origin Trials on HTTPS origins
+1. **特性检测**: 在使用 API 之前始终检查 WebNN 支持
+2. **备用策略**: 为不支持 WebNN 的浏览器实现备用方案
+3. **错误处理**: 优雅地处理错误，因为 API 仍处于实验阶段
+4. **性能监控**: 跟踪使用 WebNN 带来的性能改进
+5. **安全性**: 仅在 HTTPS 源站上使用 Origin Trial
 
-## Getting Help
+## 获取帮助
 
-- **Chrome WebNN Issues**: [Chromium Bug Tracker](https://bugs.chromium.org/)
-- **Edge WebNN Issues**: [Edge Developer Support](https://developer.microsoft.com/en-us/microsoft-edge/)
+- **Chrome WebNN 问题**: [Chromium Bug Tracker](https://bugs.chromium.org/)
+- **Edge WebNN 问题**: [Edge Developer Support](https://developer.microsoft.com/en-us/microsoft-edge/)
 
-## Next Steps
+## 后续步骤
 
-After registering and implementing the trial token:
+注册并实现试用令牌后:
 
-1. Test your WebNN implementation thoroughly
-2. Monitor performance and user experience
-3. Provide feedback to browser vendors
-4. Stay informed about trial expiration dates
-5. Plan for migration to the standard API when available
+1. 彻底测试您的 WebNN 实现
+2. 监控性能和用户体验
+3. 向浏览器厂商提供反馈
+4. 了解试用到期日期
+5. 在标准 API 可用时规划迁移
 
-## Additional Resources
+## 其他资源
 
-- [Google Chrome: Get started with origin trials](https://developer.chrome.com/docs/web-platform/origin-trials)
-- [Microsoft Edge: Test experimental APIs and features by using origin trials](https://learn.microsoft.com/en-us/microsoft-edge/origin-trials/)
+- [Google Chrome: 开始使用 Origin Trial](https://developer.chrome.com/docs/web-platform/origin-trials)
+- [Microsoft Edge: 使用 Origin Trial 测试实验性 API 和功能](https://learn.microsoft.com/en-us/microsoft-edge/origin-trials/)

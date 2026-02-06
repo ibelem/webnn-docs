@@ -2,7 +2,7 @@ export default {
   dark: 'Dark',
   light: 'Light',
   system: 'System',
-  banner: '🚧 The WebNN documentation is work-in-progress. Share feedback →',
+  banner: '💡The WebNN Origin Trial is coming! Developers can sign up for trial keys to explore →',
   backToTop: 'Scroll to top',
   lastUpdated: 'Last updated on',
   logo: {
